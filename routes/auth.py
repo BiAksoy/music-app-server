@@ -1,6 +1,7 @@
 import uuid
 import bcrypt
 from fastapi import Depends, HTTPException
+import jwt
 from models.user import User
 from fastapi import APIRouter
 from database import get_db
@@ -46,4 +47,6 @@ def login_user(user: UserLogin, db: Session=Depends(get_db)):
     if not bcrypt.checkpw(user.password.encode(), user_db.password):
         raise HTTPException(status_code=400, detail='Invalid password')
     
-    return user_db
+    token = jwt.encode({'user_id': user_db.id}, 'secret')
+    
+    return {'token': token, 'user': user_db}
