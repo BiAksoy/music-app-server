@@ -1,13 +1,14 @@
 from fastapi import HTTPException, Header
 import jwt
 
+from config import JWT_SECRET_KEY
 
 def auth_middleware(x_auth_token=Header()):
     try:
         if not x_auth_token:
             raise HTTPException(status_code=401, detail='Token not found')
         
-        verified_token = jwt.decode(x_auth_token, 'secret', algorithms=['HS256'])
+        verified_token = jwt.decode(x_auth_token, JWT_SECRET_KEY, algorithms=['HS256'])
 
         if not verified_token:
             raise HTTPException(status_code=401, detail='Invalid token')
