@@ -14,7 +14,7 @@ from pydantic_schemas.user_login import UserLogin
 
 router = APIRouter()
 
-@router.post('/signup')
+@router.post('/signup', status_code=201)
 def signup_user(user: UserCreate, db: Session=Depends(get_db)):
     # Check if user already exists
     user_db = db.query(User).filter(User.email == user.email).first()

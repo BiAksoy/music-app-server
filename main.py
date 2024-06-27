@@ -1,4 +1,3 @@
-from dotenv import load_dotenv
 from fastapi import FastAPI
 from models.base import Base
 from routes import auth, song

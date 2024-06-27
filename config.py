@@ -3,6 +3,7 @@ import os
 
 load_dotenv()
 
+DATABASE_URL = os.getenv('DATABASE_URL')
 JWT_SECRET_KEY = os.getenv('JWT_SECRET_KEY')
 CLOUDINARY_CLOUD_NAME = os.getenv('CLOUDINARY_CLOUD_NAME')
 CLOUDINARY_API_KEY = os.getenv('CLOUDINARY_API_KEY')
